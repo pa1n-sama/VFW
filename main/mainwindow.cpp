@@ -1,4 +1,3 @@
-//I don't like the actions style (in the topbarlayout), find a way to make them look better
 #include <SRepeatWindow.h>
 #include <jumptotime.h>
 #include <mainwindow.h>
@@ -161,18 +160,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   htmlstyle = win.makehtml(CONFIGSDIRECTORY);
   subpadding = win.padding;
   submarginbottom = win.marginbottom;
-
-
-  int VIEWWIDTH = view->size().width();
-  int VIEWHEIGHT = view->size().height();
-
-  video->setSize(QSize(VIEWWIDTH + 2, VIEWHEIGHT + 2));
-  scene->setSceneRect(0, 0, VIEWWIDTH - 1, VIEWHEIGHT - 1);
-  view->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
-
-  int SUBWIDTH = sublabel->boundingRect().width();
-  int SUBHEIGHT = sublabel->boundingRect().height();
-  sublabel->setPos((VIEWWIDTH - SUBWIDTH) / 2, (VIEWHEIGHT - SUBHEIGHT / 2) - submarginbottom);
 }
 
 void MainWindow::mediaplayer(QString url) {
@@ -213,6 +200,18 @@ void MainWindow::mediaplayer(QString url) {
   volumeslider->setSliderPosition(500);
   video->show();
   player->play();
+  
+  int VIEWWIDTH = view->size().width();
+  int VIEWHEIGHT = view->size().height();
+
+  video->setSize(QSize(VIEWWIDTH + 2, VIEWHEIGHT + 2));
+  scene->setSceneRect(0, 0, VIEWWIDTH - 1, VIEWHEIGHT - 1);
+  view->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
+
+  int SUBWIDTH = sublabel->boundingRect().width();
+  int SUBHEIGHT = sublabel->boundingRect().height();
+  sublabel->setPos((VIEWWIDTH - SUBWIDTH) / 2, (VIEWHEIGHT - SUBHEIGHT / 2) - submarginbottom);
+
 }
 
 // topbarlayout buttons logic
@@ -222,7 +221,7 @@ void MainWindow::topbarlayoutclick(int buttonindex) {
   switch (buttonindex) {
     // if the user choose to open a file
     case Open_file: {
-      url = QFileDialog::getOpenFileName(this, tr("Select Video File"), homedir, tr("Mp4 files (*.mp4 *.mp3)"));
+      url = QFileDialog::getOpenFileName(this, tr("Select Video File"), homedir, tr("Mp4 files (*.mp4 *.mkv *.mp3)"));
       if (!url.isEmpty()) {
         mediaplayer(url);
         playertype = "vid";
