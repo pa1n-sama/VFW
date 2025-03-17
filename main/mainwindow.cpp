@@ -161,6 +161,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   htmlstyle = win.makehtml(CONFIGSDIRECTORY);
   subpadding = win.padding;
   submarginbottom = win.marginbottom;
+
+
+  int VIEWWIDTH = view->size().width();
+  int VIEWHEIGHT = view->size().height();
+
+  video->setSize(QSize(VIEWWIDTH + 2, VIEWHEIGHT + 2));
+  scene->setSceneRect(0, 0, VIEWWIDTH - 1, VIEWHEIGHT - 1);
+  view->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
+
+  int SUBWIDTH = sublabel->boundingRect().width();
+  int SUBHEIGHT = sublabel->boundingRect().height();
+  sublabel->setPos((VIEWWIDTH - SUBWIDTH) / 2, (VIEWHEIGHT - SUBHEIGHT / 2) - submarginbottom);
 }
 
 void MainWindow::mediaplayer(QString url) {
