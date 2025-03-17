@@ -178,7 +178,15 @@ public:
       if(len != -1) path[len]='\0';
       projectpath = path;
     #endif
-    projectpath = projectpath.erase(projectpath.size()-14);
+    
+    int counter=0;
+    std::string temp;
+    std::string endpoint = "main";
+    while(projectpath.substr(counter,endpoint.size())!=endpoint){
+      temp+=projectpath[counter];
+      counter++;
+    }
+    projectpath = temp;
     return projectpath ;
   }
   
