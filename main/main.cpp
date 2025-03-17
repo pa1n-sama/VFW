@@ -9,6 +9,7 @@
 #include <filesystem>
 #include <string>
 #include <fstream>
+#include <sstream>
 
 PATHS path;
 QString homedir = path.homedir;
